@@ -51,7 +51,7 @@ cat /etc/selinux/config
 vim /etc/selinux/config
 SELINUX=disabled
  
-#É necessário reiniciar o servidor
+- É necessário reiniciar o servidor
  
 # Habilitar SYSSTAT
 systemctl enable --now sysstat
@@ -64,8 +64,7 @@ firewall-cmd --permanent --add-port=3306/tcp
 firewall-cmd --reload
  
 ## Instalar MySql 8 ##
-#Add Repo
-rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
+Add Repo rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
 sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo
 yum --enablerepo=mysql80-community install mysql-community-server 
  
@@ -79,7 +78,7 @@ systemctl status mysqld
 tail -f /var/log/mysqld.log |grep password
 mysql_secure_installation
  
-#No banco antigo fazer backup config only
+-No banco antigo fazer backup config only
  
 nohup time mysqldump -u root -pSENHA \
 --flush-logs \
@@ -118,5 +117,5 @@ grant all privileges on zabbix.* to 'zabbix'@'localhost';
 flush privileges;
 Exit
  
-#Importar banco de configuração
+# Importar banco de configuração
 nohup time mysqldump -u root -pSENHA  zabbix < /backup/backupconf-data.sql &
